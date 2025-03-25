@@ -34,7 +34,7 @@ public class Shape {
     public Shape() {
     }
 
-    public Shape(ShapeType type, ShapeColor color, String name, String imageUrl_small, String imageUrl_large    ) {
+    public Shape(ShapeType type, ShapeColor color, String name, String imageUrl_small, String imageUrl_large) {
         this.type = type;
         this.color = color;
         this.name = name;
