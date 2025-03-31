@@ -5,10 +5,10 @@ package com.ShapeStorefront.Shapes;
 // Meant for use on the product summary page displaying multiple shapes
 public class ShapeDTO {
     private String name;
-    private String id;
+    private long id;
     private String imageUrl_small;
 
-    public ShapeDTO(String name, String id, String imageUrl_small) {
+    public ShapeDTO(String name, long id, String imageUrl_small) {
         this.name = name;
         this.id = id;
         this.imageUrl_small = imageUrl_small;
@@ -18,7 +18,7 @@ public class ShapeDTO {
         return name;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }   
 

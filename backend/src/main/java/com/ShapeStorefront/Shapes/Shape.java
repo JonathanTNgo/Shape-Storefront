@@ -1,5 +1,15 @@
 package com.ShapeStorefront.Shapes;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import com.ShapeStorefront.Shapes.Shape_Enums.ShapeType;
+import com.ShapeStorefront.Shapes.Shape_Enums.ShapeColor;
+
 @Entity
 @Table(name = "Products")
 public class Shape {
@@ -15,6 +25,8 @@ public class Shape {
         strategy = GenerationType.SEQUENCE,
         generator = "id_sequence"
     )
+    @Column(nullable = false)
+    private long id;
 
     @Column(nullable = false)
     private ShapeType type;
@@ -40,6 +52,14 @@ public class Shape {
         this.name = name;
         this.imageUrl_small = imageUrl_small;
         this.imageUrl_large = imageUrl_large;
+    }
+
+    public ShapeDTO compress() {
+        return new ShapeDTO(this.name, this.id, this.imageUrl_small);
+    }
+
+    public long getId() {
+        return id;
     }
 
     public ShapeType getType() {
