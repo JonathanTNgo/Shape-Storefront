@@ -30,7 +30,7 @@ public class ShapesController {
     //    - RequestBody: (Shape ID)
 
     @GetMapping("/Home")
-    public ResponseEntity<?> getDisplayShapes(@RequestBody (required = false) ShapeRequestDTO request) {
+    public ResponseEntity<?> getDisplayShapes(@RequestBody (required = false) ShapeRequestDTO request, Pageable pageable) {
         try {
             if (request == null) {
                 request = new ShapeRequestDTO();
@@ -48,7 +48,7 @@ public class ShapesController {
     
             // Page info validation NOT required as it is defaulted to 4 and 1 if not provided
     
-            return ResponseEntity.accepted().body(shapesService.getDisplayShapes(request.getName(), request.getColor(), request.getType(), request.getElementsPerPage(), request.getPageNumber()));
+            return ResponseEntity.accepted().body(shapesService.getDisplayShapes(request.getName(), request.getColor(), request.getType(), pageable));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
