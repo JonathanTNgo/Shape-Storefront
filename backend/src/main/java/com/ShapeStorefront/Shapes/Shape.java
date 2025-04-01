@@ -1,6 +1,8 @@
 package com.ShapeStorefront.Shapes;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -11,7 +13,7 @@ import com.ShapeStorefront.Shapes.Shape_Enums.ShapeType;
 import com.ShapeStorefront.Shapes.Shape_Enums.ShapeColor;
 
 @Entity
-@Table(name = "Products")
+@Table(name = "products")
 public class Shape {
     
     @Id
@@ -19,43 +21,44 @@ public class Shape {
         name = "id_sequence",
         sequenceName = "id_sequence",
         allocationSize = 1
-
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
         generator = "id_sequence"
     )
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private ShapeType type;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "color", nullable = false)
     private ShapeColor color;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String imageUrl_small;
+    @Column(name = "image_url_small", nullable = false)
+    private String image_url_small;
 
-    @Column(nullable = false)
-    private String imageUrl_large;
+    @Column(name = "image_url_large", nullable = false)
+    private String image_url_large;
 
     public Shape() {
     }
 
-    public Shape(ShapeType type, ShapeColor color, String name, String imageUrl_small, String imageUrl_large) {
+    public Shape(ShapeType type, ShapeColor color, String name, String image_url_small, String image_url_large) {
         this.type = type;
         this.color = color;
         this.name = name;
-        this.imageUrl_small = imageUrl_small;
-        this.imageUrl_large = imageUrl_large;
+        this.image_url_small = image_url_small;
+        this.image_url_large = image_url_large;
     }
 
     public ShapeDTO compress() {
-        return new ShapeDTO(this.name, this.id, this.imageUrl_small);
+        return new ShapeDTO(this.name, this.id, this.image_url_small);
     }
 
     public long getId() {
@@ -74,12 +77,12 @@ public class Shape {
         return name;
     }   
 
-    public String getImageUrl_small() {
-        return imageUrl_small;
+    public String getimage_url_small() {
+        return image_url_small;
     }
 
-    public String getImageUrl_large() {
-        return imageUrl_large;
+    public String getimage_url_large() {
+        return image_url_large;
     }
 
     public void setType(ShapeType type) {
@@ -94,12 +97,12 @@ public class Shape {
         this.name = name;
     }   
 
-    public void setImageUrl_small(String imageUrl_small) {
-        this.imageUrl_small = imageUrl_small;
+    public void setimage_url_small(String image_url_small) {
+        this.image_url_small = image_url_small;
     }
 
-    public void setImageUrl_large(String imageUrl_large) {
-        this.imageUrl_large = imageUrl_large;
+    public void setimage_url_large(String image_url_large) {
+        this.image_url_large = image_url_large;
     }
 
     @Override
@@ -108,8 +111,8 @@ public class Shape {
                 "type=" + type +
                 ", color=" + color +
                 ", name='" + name + '\'' +
-                ", imageUrl_small='" + imageUrl_small + '\'' +
-                ", imageUrl_large='" + imageUrl_large + '\'' +
+                ", image_url_small='" + image_url_small + '\'' +
+                ", image_url_large='" + image_url_large + '\'' +
                 '}';
     }
     

@@ -44,8 +44,8 @@ def populate_database():
                     "type": shape_type.upper(),
                     "color": shape_color.upper(),
                     "name": file_name,
-                    "imageUrl_small": f"https://yreiokyimjpronjajfjr.supabase.co/storage/v1/object/public/shape-images//{shape_type}_{shape_color}_small.png",
-                    "imageUrl_large": f"https://yreiokyimjpronjajfjr.supabase.co/storage/v1/object/public/shape-images//{shape_type}_{shape_color}_large.png"
+                    "image_url_small": f"https://yreiokyimjpronjajfjr.supabase.co/storage/v1/object/public/shape-images//{shape_type}_{shape_color}_small.png",
+                    "image_url_large": f"https://yreiokyimjpronjajfjr.supabase.co/storage/v1/object/public/shape-images//{shape_type}_{shape_color}_large.png"
                 }).execute();
                 id += 1
                 
