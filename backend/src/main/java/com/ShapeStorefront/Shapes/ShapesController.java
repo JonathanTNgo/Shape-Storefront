@@ -1,12 +1,12 @@
 package com.ShapeStorefront.Shapes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ShapeStorefront.Shapes.Shape_Enums.ShapeColor;
@@ -31,11 +31,17 @@ public class ShapesController {
     // 2. Singular Product page
     //    - RequestBody: (Shape ID)
 
-    @GetMapping("/Home")
+    @GetMapping("/home")
     public ResponseEntity<?> getDisplayShapes(@RequestBody (required = false) ShapeRequestDTO request, Pageable pageable) {
         try {
             if (request == null) {
                 request = new ShapeRequestDTO();
+                System.out.println("Request is null");
+            }
+
+            // Validate page and size
+            if (pageable.getPageNumber() < 0 || pageable.getPageSize() < 1) {
+                throw new IllegalArgumentException("Page number and size must be greater than 0");
             }
     
             // Validate Color
@@ -48,8 +54,6 @@ public class ShapesController {
                 throw new IllegalArgumentException("Invalid type");
             }
     
-            // Page info validation NOT required as it is defaulted to 4 and 1 if not provided
-    
             return ResponseEntity.accepted().body(shapesService.getDisplayShapes(request.getName(), request.getColor(), request.getType(), pageable));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -57,7 +61,7 @@ public class ShapesController {
     }
 
     @GetMapping("/shape")
-    public ResponseEntity<?> getShape(@RequestBody (required = true) int id) {
+    public ResponseEntity<?> getShape(@RequestParam (required = true) int id) {
         try {
             return ResponseEntity.accepted().body(shapesService.getShape(id));
         } catch (IllegalArgumentException e) {

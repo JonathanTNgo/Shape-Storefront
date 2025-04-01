@@ -14,6 +14,6 @@ public interface ShapesRepository extends JpaRepository<Shape, Integer> {
     // @Query("SELECT COUNT(*) FROM Shape WHERE (:name IS NULL OR name = :name) AND (:color IS NULL OR color = :color) AND (:type IS NULL OR type = :type)")
     // long countFiltered(@Param("name") String name, @Param("color") ShapeColor color, @Param("type") ShapeType type);
 
-    @Query("SELECT s FROM Shape WHERE (:name IS NULL OR name = :name) AND (:color IS NULL OR color = :color) AND (:type IS NULL OR type = :type)")
+    @Query("SELECT s FROM Shape s WHERE (:name IS NULL OR s.name = :name) AND (:color IS NULL OR s.color = :color) AND (:type IS NULL OR s.type = :type)")
     Page<Shape> findFilter(@Param("name") String name, @Param("color") ShapeColor color, @Param("type") ShapeType type, Pageable pageable);
 }

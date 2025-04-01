@@ -21,6 +21,7 @@ public class ShapesService {
     public Page<ShapeDTO> getDisplayShapes(String name, ShapeColor color, ShapeType type, Pageable pageable) {
         // Get relevant shapes from database
         Page<Shape> shapes = shapesRepository.findFilter(name, color, type, pageable);
+        // Page<Shape> shapes = shapesRepository.findFilterTest(pageable);
         
         // Iterate through shapes and compress them (ONLY IF THEY ARE DISPLAYED ON HOME PAGE)
         return shapes.map(shape -> shape.compress());
